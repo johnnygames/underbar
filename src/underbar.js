@@ -94,6 +94,16 @@
   _.reject = function(collection, test) {
     // TIP: see if you can re-use _.filter() here, without simply
     // copying code in and modifying it
+    var truthfail = [];
+
+    _.each(collection, function (val) {
+      if (!test(val)) {
+        truthfail.push(val);
+      }
+    });
+
+    return truthfail;
+
   };
 
   // Produce a duplicate-free version of the array.
