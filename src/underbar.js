@@ -107,9 +107,28 @@
   };
 
   // Produce a duplicate-free version of the array.
-  _.uniq = function(array) {
-  };
+  //_.uniq = function(array) {
+    //var uniqueItems = {};
 
+    //_.each(array, function (item) {
+      //uniqueItems[item] = true;
+    //});
+
+    //return Object.keys(uniqueItems);
+    _.uniq = function(array) {
+      var initial = {};
+      var uniqueItems = [];
+      var counter = 0;
+
+      for (var i = 0; i < array.length; i++) {
+        var tempIndex = array[i];
+        if(initial[tempIndex] !== 1) {
+          initial[tempIndex] = 1;
+          uniqueItems[counter++] = tempIndex;
+        }
+      };
+      return uniqueItems;
+  };
 
   // Return the results of applying an iterator to each element.
   _.map = function(collection, iterator) {
