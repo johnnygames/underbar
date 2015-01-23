@@ -183,13 +183,16 @@
   //   }); // should be 5, regardless of the iterator function passed in
   //          No accumulator is given so the first element is used.
   _.reduce = function(collection, iterator, accumulator) {
-    var accumulator = accumulator || 0;
-
-    _.each(collection, function (val) {
-      accumulator = iterator(accumulator, val);
+    var result = accumulator === undefined ? collection[0] : accumulator;
+  
+    _.each(collection, function(item, index) {
+      if (accumulator !== undefined || index !== 0){
+        result = iterator(result, item);
+      }
     });
 
-    return accumulator;
+  return result;
+  
   };
 
   // Determine if the array or object contains a given value (using `===`).
@@ -207,6 +210,14 @@
 
   // Determine whether all of the elements match a truth test.
   _.every = function(collection, iterator) {
+    iterator = iterator || _.identity
+
+    return _.reduce(collection, function (initial, val) {
+      if (test(value) && initial) {
+        return true;
+      }
+      return false;
+    }, true);
     // TIP: Try re-using reduce() here.
   };
 
@@ -307,6 +318,9 @@
   // input array. For a tip on how to make a copy of an array, see:
   // http://mdn.io/Array.prototype.slice
   _.shuffle = function(array) {
+    copyArray = array.slice(0);
+
+
   };
 
 
