@@ -210,13 +210,19 @@
 
   // Determine whether all of the elements match a truth test.
   _.every = function(collection, iterator) {
-    iterator = iterator || _.identity
 
-    return _.reduce(collection, function (initial, val) {
-      if (test(value) && initial) {
-        return true;
+    return _.reduce(collection, function (truthy, val) {
+      var tested;
+      if (!truthy) {
+        return false;
       }
-      return false;
+      tested = iterator(val);
+      if (tested === 1) {
+        tested = true;
+      } else if (tested === 0) {
+        tested = false;
+      }
+      return tested;
     }, true);
     // TIP: Try re-using reduce() here.
   };
@@ -318,8 +324,14 @@
   // input array. For a tip on how to make a copy of an array, see:
   // http://mdn.io/Array.prototype.slice
   _.shuffle = function(array) {
-    copyArray = array.slice(0);
-
+    var copyArray = array.slice();
+    for (var i = 0; i < array.length; i++) {
+      var randomizer = Math.floor(Math.random()*10);
+      var holder = copyArray[i];
+      copyArray[i] = copyArray[randomizer];
+      copyArray[randomizer] = holder;
+    };
+    return copyArray;
 
   };
 
