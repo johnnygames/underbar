@@ -364,7 +364,7 @@
   _.shuffle = function(array) {
     var copyArray = array.slice();
     for (var i = 0; i < array.length; i++) {
-      var randomizer = Math.floor(Math.random()*10);
+      var randomizer = Math.floor(Math.random()*i);
       var holder = copyArray[i];
       copyArray[i] = copyArray[randomizer];
       copyArray[randomizer] = holder;
