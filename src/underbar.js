@@ -210,7 +210,9 @@
 
   // Determine whether all of the elements match a truth test.
   _.every = function(collection, iterator) {
-
+    if (!iterator) {
+      iterator = _.identity;
+    }
     return _.reduce(collection, function (truthy, val) {
       var tested;
       if (!truthy) {
